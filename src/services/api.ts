@@ -11,7 +11,7 @@ const apiClient = axios.create({
 
 export default {
   async getDisasters() {
-    return apiClient.get('/disaster');
+    return apiClient.get('/disaster/');
   },
 
   async getDisasterById(id: string) {

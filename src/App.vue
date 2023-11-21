@@ -1,34 +1,54 @@
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+  <header></header>
 
   <main>
-    <TheWelcome />
+    <!--TheWelcome /-->
+    <div id="container">
+      <!--MapContainer/-->
+    </div>
+    <!--VueSidebarMenuAkahon/-->
+    <div>
+      <VueTable :headers="header" :data="data" :keys="keys" dark />
+    </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import ApiService from '@/services/api' // 替换为你实际的路径
+import ApiService from '@/services/api'
+import MapContainer from '@/components/MapContainer.vue'
+import VueSidebarMenuAkahon from '@/components/Sidebar-menu-akahon.vue'
+import { VueTable } from '@harv46/vue-table'
+import '@harv46/vue-table/dist/style.css'
+
+const header = ['编号', '编码', '时间', '来源']
+const keys = ['id', 'code', 'time', 'source']
+
+let data: any = []
+
 ApiService.getDisasters()
   .then((response) => {
-    console.log(response.data)
+    response.data.forEach((item: any) => {
+      // console.log(item.id, item.code, item.time, item.source);
+      data.push({
+        id: item.id,
+        code: item.code,
+        time: item.time,
+        source: item.source
+      })
+    })
+    console.log(data)
   })
   .catch((error) => {
     console.error('Error fetching disasters:', error)
   })
 ApiService.getDisasterById('4')
   .then((response) => {
+    /*
     console.log(response.data.location)
     console.log(response.data.carrier)
     console.log(response.data.time)
     console.log(response.data.code)
+    */
   })
   .catch((error) => {
     console.error(`Error fetching 3disaster:`, error)
