@@ -6,7 +6,8 @@
     <n-icon size="40" color="#0e7a0d">
       <game-controller />
     </n-icon>
-    <n-icon size="40" :component="GameController" /></div>
+    <n-icon size="40" :component="GameController" />
+  </div>
     <h2 class="title">MSHD-2.0</h2>
   </template>
   
@@ -29,12 +30,10 @@
 
 <style scoped>
 .title {
-  position: relative;
-  left: 23%;
+  position: center;
 }
 
 .icons {
-  position: relative;
-  left: 20%;
+  position: center;
 }
 </style>

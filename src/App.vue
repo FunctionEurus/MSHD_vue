@@ -10,12 +10,11 @@
 </template>
 
 <script setup lang="ts">
-import ApiService from '@/services/api'
 import { ref, computed } from 'vue'
 import Home from './pages/Home.vue'
 import About from './pages/About.vue'
 import NotFound from './pages/NotFound.vue'
-const routes = {
+const routes: any = {
   '/': Home,
   '/about': About
 }
@@ -26,29 +25,12 @@ window.addEventListener('hashchange', () => {
 const currentView = computed(() => {
   return routes[currentPath.value.slice(1) || '/'] || NotFound
 })
-
-let word = ref('')
-
-ApiService.getDisasters().then((response) => {
-  response.data
-    .forEach((item) => {
-      console.log(item.id, item.code, item.time, item.source)
-      word.value = item.code
-    })
-    .catch((error) => {
-      console.error('Error fetching disasters:', error)
-    })
-  ApiService.getDisasterById('4')
-    .then((response) => {
-      console.log(response.data.location)
-      console.log(response.data.carrier)
-      console.log(response.data.time)
-      console.log(response.data.code)
-    })
-    .catch((error) => {
-      console.error(`Error fetching 3disaster:`, error)
-    })
-})
 </script>
 
-<style scoped></style>
+<style scoped>
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+</style>

@@ -1,5 +1,29 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
+  <n-space justify="end">
+    <div class="icons">
+      <n-icon size="40">
+        <game-controller-outline />
+      </n-icon>
+      <n-icon size="40" color="#0e7a0d" v-if="!collapsed">
+        <game-controller />
+      </n-icon>
+      <n-icon size="40" :component="GameController" v-if="!collapsed" />
+    </div>
+  </n-space>
+  <div>
+    <n-space justify="end">
+      <h2 class="title" v-if="collapsed">MSHD</h2>
+      <h2 class="title" v-if="!collapsed">多源异构灾情数据</h2>
+    </n-space>
+    <n-space justify="end" v-if="!collapsed">
+      <h2>一体化编码管理</h2>
+    </n-space>
+    <n-space justify="end" v-if="!collapsed">
+      <h2>MSHD-2.0</h2>
+    </n-space>
+  </div>
+
   <n-layout has-sider>
     <n-layout-sider
       bordered
@@ -36,8 +60,12 @@ import {
   PersonCircleOutline as PersonCircleIcon,
   CloudUpload as UploadIcon,
   Bookmarks as ViewIcon,
-  Build as ModifyIcon
+  Build as ModifyIcon,
+  GameControllerOutline,
+  GameController
 } from '@vicons/ionicons5'
+
+const word: string = ''
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -92,10 +120,15 @@ const menuOptions: MenuOption[] = [
 ]
 
 export default defineComponent({
+  components: {
+    GameController,
+    GameControllerOutline
+  },
   setup() {
     return {
       collapsed: ref(false),
-      menuOptions
+      menuOptions,
+      GameController
     }
   }
 })
