@@ -49,7 +49,7 @@
     }
   ]
   
-  const data = Array.apply(null, { length: 987 }).map((_, index) => {
+  const data = Array.apply(null, { length: 20 }).map((_, index) => {
     return {
       column1: index,
       column2: (index % 2) + 1,

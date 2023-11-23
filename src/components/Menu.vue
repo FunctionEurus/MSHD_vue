@@ -1,52 +1,51 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <n-space justify="end">
-    <div class="icons">
-      <n-icon size="40">
-        <game-controller-outline />
-      </n-icon>
-      <n-icon size="40" color="#0e7a0d" v-if="!collapsed">
-        <game-controller />
-      </n-icon>
-      <n-icon size="40" :component="GameController" v-if="!collapsed" />
+  <n-space vertical>
+    <div class="iconsandtitle">
+      <div class="icons">
+        <n-icon size="40">
+          <game-controller-outline />
+        </n-icon>
+        <n-icon size="40" color="#0e7a0d" v-if="!collapsed">
+          <game-controller />
+        </n-icon>
+        <n-icon size="40" :component="GameController" v-if="!collapsed" />
+      </div>
+      <div>
+        <h2 class="title" v-if="collapsed">MSHD</h2>
+        <h2 class="title" v-if="!collapsed">多源异构灾情数据</h2>
+        <div v-if="!collapsed">
+          <h2>一体化编码管理</h2>
+        </div>
+        <div v-if="!collapsed">
+          <h2>MSHD-2.0</h2>
+        </div>
+      </div>
     </div>
-  </n-space>
-  <div>
-    <n-space justify="end">
-      <h2 class="title" v-if="collapsed">MSHD</h2>
-      <h2 class="title" v-if="!collapsed">多源异构灾情数据</h2>
-    </n-space>
-    <n-space justify="end" v-if="!collapsed">
-      <h2>一体化编码管理</h2>
-    </n-space>
-    <n-space justify="end" v-if="!collapsed">
-      <h2>MSHD-2.0</h2>
-    </n-space>
-  </div>
-
-  <n-layout has-sider>
-    <n-layout-sider
-      bordered
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      :value="collapsed"
-      show-trigger
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
-    >
-      <n-menu
-        :collapsed="collapsed"
+    <n-layout has-sider>
+      <n-layout-sider
+        bordered
+        collapse-mode="width"
         :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-        key-field="whateverKey"
-        label-field="whateverLabel"
-        children-field="whateverChildren"
-      />
-    </n-layout-sider>
-    <n-layout />
-  </n-layout>
+        :width="240"
+        :value="collapsed"
+        show-trigger
+        @collapse="collapsed = true"
+        @expand="collapsed = false"
+      >
+        <n-menu
+          :collapsed="collapsed"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+          key-field="whateverKey"
+          label-field="whateverLabel"
+          children-field="whateverChildren"
+        />
+      </n-layout-sider>
+      <n-layout />
+    </n-layout>
+  </n-space>
 </template>
 
 <script lang="ts">
@@ -64,8 +63,6 @@ import {
   GameControllerOutline,
   GameController
 } from '@vicons/ionicons5'
-
-const word: string = ''
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -133,3 +130,10 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.iconsandtitle {
+  position: relative;
+  left: 5%;
+}
+</style>

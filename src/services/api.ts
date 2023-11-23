@@ -15,11 +15,16 @@ export default {
   },
 
   async getDisasterById(id: string) {
-    return apiClient.get(`/disaster/${id}`);
+    apiClient.get(`/disaster/${id}`).then(response => {
+      return response.data
+    });
   },
 
-  async createDisaster(id: string, code: string) {
-    return apiClient.post('/disaster/', code);
+  async createDisaster(code: string) {
+    const obj = { code: code }
+    const jsonString = JSON.stringify(obj);
+    // console.log(jsonString)
+    return apiClient.post('/disaster/', jsonString);
   },
 
   async updateDisaster(id: string, code: string) {
