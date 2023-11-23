@@ -7,6 +7,8 @@
         <n-breadcrumb-item href="#/input">Input</n-breadcrumb-item>
         <n-breadcrumb-item href="#/non-existent-path">UploadFiles</n-breadcrumb-item>
         <n-breadcrumb-item href="#/map">Map</n-breadcrumb-item>
+        <n-breadcrumb-item href="#/query">Query</n-breadcrumb-item>
+        <n-breadcrumb-item href="#/delete">Delete</n-breadcrumb-item>
         <n-breadcrumb-item href="#/non-existent-path">404</n-breadcrumb-item>
       </n-breadcrumb>
     </header>
@@ -28,6 +30,9 @@ import Home from './pages/Home.vue'
 import Login_Register from './pages/Login&Register.vue'
 import Input from './pages/Input.vue'
 import Map from '@/pages/Map.vue'
+import Query from '@/pages/Query.vue'
+import Delete from '@/pages/Delete.vue'
+
 import NotFound from './pages/NotFound.vue'
 import Menu from '@/components/Menu.vue'
 
@@ -35,7 +40,9 @@ const routes: any = {
   '/': Home,
   '/login&register': Login_Register,
   '/input': Input,
-  '/map': Map
+  '/map': Map,
+  '/query': Query,
+  '/delete': Delete
 }
 const currentPath = ref(window.location.hash)
 window.addEventListener('hashchange', () => {

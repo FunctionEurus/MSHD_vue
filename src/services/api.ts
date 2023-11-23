@@ -11,20 +11,17 @@ const apiClient = axios.create({
 
 export default {
   async getDisasters() {
-    return apiClient.get('/disaster/');
+    return apiClient.get('/disaster/')
   },
 
   async getDisasterById(id: string) {
-    apiClient.get(`/disaster/${id}`).then(response => {
-      return response.data
-    });
+    return apiClient.get(`/disaster/${id}`)
   },
 
   async createDisaster(code: string) {
     const obj = { code: code }
-    const jsonString = JSON.stringify(obj);
-    // console.log(jsonString)
-    return apiClient.post('/disaster/', jsonString);
+    const jsonCode = JSON.stringify(obj);
+    return apiClient.post('/disaster/', jsonCode);
   },
 
   async updateDisaster(id: string, code: string) {

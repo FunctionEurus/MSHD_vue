@@ -16,12 +16,13 @@
 import { defineComponent, ref, type Ref } from 'vue'
 import ApiService from '@/services/api'
 
-/* 想试着直接输出结果 */
-
 export default defineComponent({
     methods: {
         submit() {
-          ApiService.createDisaster(this.value)
+          console.log(this.value[0])
+          ApiService.createDisaster(this.value[0]).then(response => {
+            this.decode = response.data
+          })
         }
     },
     setup() {
