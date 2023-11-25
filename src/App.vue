@@ -1,27 +1,19 @@
 <template>
-  <n-space vertical style="width: 200%">
-    <header>
-      <n-breadcrumb style="width: auto">
-        <n-breadcrumb-item href="#/">Home</n-breadcrumb-item>
-        <n-breadcrumb-item href="#/login&register">Login&Register</n-breadcrumb-item>
-        <n-breadcrumb-item href="#/input">Input</n-breadcrumb-item>
-        <n-breadcrumb-item href="#/uploadfiles">UploadFiles</n-breadcrumb-item>
-        <n-breadcrumb-item href="#/map">Map</n-breadcrumb-item>
-        <n-breadcrumb-item href="#/query">Query</n-breadcrumb-item>
-        <n-breadcrumb-item href="#/delete">Delete</n-breadcrumb-item>
-        <n-breadcrumb-item href="#/update">Update</n-breadcrumb-item>
-        <n-breadcrumb-item href="#/non-existent-path">404</n-breadcrumb-item>
-      </n-breadcrumb>
-    </header>
-    <n-space size="large" style="margin-top: 5%; width: auto">
-      <div>
-        <Menu />
-      </div>
-      <div>
-        <component :is="currentView" />
-      </div>
-    </n-space>
-  </n-space>
+  <n-breadcrumb>
+    <n-breadcrumb-item href="#/">Home</n-breadcrumb-item>
+    <n-breadcrumb-item href="#/login&register">Login&Register</n-breadcrumb-item>
+    <n-breadcrumb-item href="#/input">Input</n-breadcrumb-item>
+    <n-breadcrumb-item href="#/uploadfiles">UploadFiles</n-breadcrumb-item>
+    <n-breadcrumb-item href="#/map">Map</n-breadcrumb-item>
+    <n-breadcrumb-item href="#/query">Query</n-breadcrumb-item>
+    <n-breadcrumb-item href="#/delete">Delete</n-breadcrumb-item>
+    <n-breadcrumb-item href="#/update">Update</n-breadcrumb-item>
+    <n-breadcrumb-item href="#/non-existent-path">404</n-breadcrumb-item>
+  </n-breadcrumb>
+  <div style="display: flex; flex-direction: row;">
+    <Menu style="margin-right: 1em; width: fit-content;"/>
+    <component :is="currentView" />
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,8 +1,6 @@
 <template>
-  <n-space justify="center">
     <n-input-number v-model:value="value" clearable />
     <n-button @click="del">删除</n-button>
-  </n-space>
   <n-card
     title="删除结果:"
     style="margin-top: 5%"

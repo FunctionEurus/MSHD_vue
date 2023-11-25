@@ -1,4 +1,4 @@
-
+<template>
   <n-tabs
     v-model:value="name"
     type="card"
@@ -15,7 +15,7 @@
       {{ panel }}
     </n-tab-pane>
   </n-tabs>
-
+</template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

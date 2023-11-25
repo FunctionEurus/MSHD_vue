@@ -1,10 +1,8 @@
 <template>
-  <n-space justify="space-between" style="width: auto;">
-    <n-form-item ignore-path-change :show-label="false" :rule="dynamicInputRule" style="width: 150%;">
-      <n-dynamic-input v-model:value="value" placeholder="请输入编码" 
-    /></n-form-item>
-    <n-button @click="submit" style="margin-left: 250%; width: auto;" >提交</n-button>
-  </n-space>
+  <n-form-item ignore-path-change :show-label="false" :rule="dynamicInputRule" style="width: 150%">
+    <n-dynamic-input v-model:value="value" placeholder="请输入编码"
+  /></n-form-item>
+  <n-button @click="submit" style="margin-left: 250%; width: auto">提交</n-button>
   <!--<pre>{{ JSON.stringify(value, null, 1) }}</pre>-->
   <n-card
     title="插入结果:"

@@ -43,7 +43,7 @@
           children-field="whateverChildren"
         />
       </n-layout-sider>
-      <n-layout />
+      
     </n-layout>
   </n-space>
 </template>

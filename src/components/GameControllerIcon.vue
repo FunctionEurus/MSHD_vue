@@ -29,11 +29,11 @@
   </script>
 
 <style scoped>
-.title {
+/* .title {
   position: center;
 }
 
 .icons {
   position: center;
-}
+} */
 </style>

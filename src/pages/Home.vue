@@ -3,10 +3,12 @@
   <div id="app">
     <div class="main-container">
       <main>
+        <h1><em>VVelcome!</em></h1>
+        <h1 style="color: #1BA657;"><em>VVelcome!</em></h1>
         <div id="container">
           <!--MapContainer/-->
           <!--<nButton @click="fetchdata" :style="{ width: 'fit-content' }">看看数据</nButton>-->
-          <DataTable />
+          <!--DataTable /-->
         </div>
       </main>
     </div>
@@ -15,22 +17,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-// import MapContainer from '@/components/MapContainer.vue'
-import DataTable from '@/components/DataTable.vue'
-import ApiService from '@/services/api'
-import { defineComponent, ref } from 'vue'
-
-let word = ref('')
-/*
-const fetchdata = () => {
-  ApiService.getDisasters().then((response: any) => {
-    console.log(response.data)
-  })
-}
-*/
-</script>
 
 <style scoped>
 #app {

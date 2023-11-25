@@ -1,9 +1,9 @@
 <template>
   <n-upload abstract :default-file-list="fileList" action="http://localhost:4000/upload">
-    <n-card style="width: 200%" title="文件列表">
+    <n-card title="文件列表">
       <n-upload-file-list />
     </n-card>
-    <n-button-group style="margin-top: 10%;">
+    <n-button-group>
       <n-upload-trigger #="{ handleClick }" abstract>
         <n-button @click="handleClick"> 上传 </n-button>
       </n-upload-trigger>
