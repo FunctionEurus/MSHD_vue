@@ -25,7 +25,9 @@ export default {
   },
 
   async updateDisaster(id: string, code: string) {
-    return apiClient.patch(`/disaster/${id}`, code);
+    const obj = { code: code }
+    const jsonCode = JSON.stringify(obj);
+    return apiClient.patch(`/disaster/${id}`, jsonCode);
   },
 
   async deleteDisaster(id: string) {

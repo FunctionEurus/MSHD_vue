@@ -1,5 +1,5 @@
 <template>
-  <n-space vertical style="width: 150%">
+  <n-space vertical style="width: 200%">
     <header>
       <n-breadcrumb style="width: auto">
         <n-breadcrumb-item href="#/">Home</n-breadcrumb-item>
@@ -13,7 +13,7 @@
         <n-breadcrumb-item href="#/non-existent-path">404</n-breadcrumb-item>
       </n-breadcrumb>
     </header>
-    <n-space justify="space-around" size="large" style="margin-top: 5%; width: auto">
+    <n-space size="large" style="margin-top: 5%; width: auto">
       <div>
         <Menu />
       </div>
