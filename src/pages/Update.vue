@@ -1,8 +1,11 @@
 <template>
   <div>
-    <h3>请输入要修改的数据id:</h3>
-    <n-input-number v-model:value="id" clearable />
-    <n-button @click="findone">查询</n-button>
+    <n-space style="width: 110%">
+      <h3>请输入要修改的数据id:</h3>
+      <n-input-number v-model:value="id" clearable />
+      <n-button @click="findone">查询</n-button>
+      <p v-if="updateresult === 'success'">更新成功！</p>
+    </n-space>
     <h3 v-if="dbid != ''" style="margin-top: 5%">请选择要修改的字段:</h3>
     <n-radio-group
       v-model:value="choice"
@@ -18,8 +21,10 @@
       />
     </n-radio-group>
     <!--<h3 style="margin-top: 5%">你选择了: {{ choice }}</h3>-->
-    <n-input-number v-model:value="updatevalue" clearable v-if="dbid != ''" />
-    <n-button @click="update" v-if="dbid != ''">修改</n-button>
+    <n-space style="margin-top: 5%">
+      <n-input-number v-model:value="updatevalue" clearable v-if="dbid != ''" />
+      <n-button @click="update" v-if="dbid != ''">修改</n-button>
+    </n-space>
     <div style="display: flex">
       <div>
         <n-card
@@ -67,7 +72,7 @@
       </div>
     </div>
   </div>
-  <div class="codecard">
+  <div class="codecard" style="align-items: center; display: flex">
     <n-card title="来源码" style="margin-top: 5%; width: 350px" v-if="choice === 'source'">
       <n-tabs default-value="business" justify-content="space-evenly" type="line" bar-width="50%">
         <n-tab-pane name="business" tab="业务报送数据">
@@ -290,7 +295,12 @@ export default defineComponent({
           this.source = response.data.source
           this.carrier = response.data.carrier
           this.disaster = response.data.disaster
-          this.code = response.data.code
+          this.code =
+            response.data.location_code +
+            response.data.time_code +
+            response.data.source_code +
+            response.data.carrier_code +
+            response.data.disaster_code
         }
       })
     },
@@ -298,7 +308,6 @@ export default defineComponent({
       let newcode = ''
       if (this.choice === 'location') {
         newcode = this.updatevalue + this.code.substring(12, this.code.length + 1)
-        console.log(newcode)
       } else if (this.choice === 'time') {
         newcode =
           this.code.substring(0, 12) +
@@ -317,7 +326,11 @@ export default defineComponent({
       } else if (this.choice === 'disaster') {
         newcode = this.code.substring(0, 30) + this.updatevalue
       }
-      ApiService.updateDisaster(this.dbid, newcode)
+      ApiService.updateDisaster(this.dbid, newcode).then((response) => {
+        if (response.status) {
+          this.updateresult = 'success'
+        }
+      })
     }
   },
   setup() {
@@ -334,6 +347,7 @@ export default defineComponent({
       disaster: ref(''),
       code: ref(''),
       updatevalue: ref(''),
+      updateresult: ref(''),
       fields: [
         {
           value: 'location',

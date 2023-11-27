@@ -1,79 +1,84 @@
 <template>
   <n-space vertical>
-    <n-space>
-      <h3>查询单条记录</h3>
-      <n-input-number v-model:value="id" clearable />
-      <n-button @click="findone">查询</n-button>
-    </n-space>
-    <n-card
-      class="card"
-      title="查询结果:"
-      :segmented="{
-        content: true,
-        footer: 'soft'
-      }"
-      v-if="dbid != ''"
-    >
-      <template #footer>
-        记录编号: {{ dbid }}<br />
-        地理信息: {{ location }} <br />
-        发生时间: {{ time }}<br />
-        来源: {{ source }} <br />
-        载体:{{ carrier }}<br />
-        灾情: {{ disaster }}<br />
-        编码: {{ code }}
-      </template>
-    </n-card>
-    <n-card
-      class="card"
-      title="查询结果:"
-      :segmented="{
-        content: true,
-        footer: 'soft'
-      }"
-      v-if="dbid === '' && one != ''"
-    >
-      <template #footer>{{ one }}</template>
-    </n-card>
     <n-space vertical>
-      <h3><em>喜欢表格还是卡片？</em></h3>
+      <h3># 查询单条记录</h3>
       <n-space>
-        <h3>卡片</h3>
-        <n-switch v-model:value="tableorcard" />
-        <h3>表格</h3>
-        <n-button @click="findall">查询全部</n-button>
+        <n-input-number v-model:value="id" clearable />
+        <n-button @click="findone">查询</n-button>
       </n-space>
-    </n-space>
-    <n-data-table
-      pagination-behavior-on-filter="first"
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-      v-if="tableorcard"
-    />
-    <n-space>
+      <h3># 查询所有记录</h3>
       <n-card
-        v-for="(item, index) in alls"
-        :key="index"
         class="card"
-        :title="`第${index}条记录`"
+        title="查询结果:"
         :segmented="{
           content: true,
           footer: 'soft'
         }"
+        v-if="dbid != ''"
         style="width: auto"
-        v-if="all === '查询到数据。' && !tableorcard"
       >
         <template #footer>
-          记录编号: {{ item.id }}<br />
-          地理信息: {{ item.location }} <br />
-          发生时间: {{ item.time }}<br />
-          来源: {{ item.source }} <br />
-          载体:{{ item.carrier }}<br />
-          灾情: {{ item.disaster }}<br />
-          编码: {{ item.code }}
+          记录编号: {{ dbid }}<br />
+          地理信息: {{ location }} <br />
+          发生时间: {{ time }}<br />
+          来源: {{ source }} <br />
+          载体:{{ carrier }}<br />
+          灾情: {{ disaster }}<br />
+          编码: {{ code }}
         </template>
       </n-card>
+      <n-card
+        style="width: auto"
+        class="card"
+        title="查询结果:"
+        :segmented="{
+          content: true,
+          footer: 'soft'
+        }"
+        v-if="dbid === '' && one != ''"
+      >
+        <template #footer>{{ one }}</template>
+      </n-card>
+      <n-space vertical>
+        <h3><em>喜欢表格还是卡片？</em></h3>
+        <n-space>
+          <h3>卡片</h3>
+          <n-switch v-model:value="tableorcard" />
+          <h3>表格</h3>
+          <n-button @click="findall">查询全部</n-button>
+        </n-space>
+      </n-space>
+      <n-data-table
+        pagination-behavior-on-filter="first"
+        :columns="columns"
+        :data="data"
+        :pagination="pagination"
+        v-if="tableorcard"
+      />
+      <n-space>
+        <n-card
+          v-for="(item, index) in alls"
+          :key="index"
+          class="card"
+          :title="`第${index + 1}条记录`"
+          :segmented="{
+            content: true,
+            footer: 'soft'
+          }"
+          style="width: auto"
+          v-if="all === '查询到数据。' && !tableorcard"
+        >
+          <template #footer>
+            记录编号: {{ item.id }}<br />
+            地理信息: {{ item.location }} <br />
+            发生时间: {{ item.time }}<br />
+            来源: {{ item.source }} <br />
+            载体: {{ item.carrier }}<br />
+            灾情: {{ item.disaster }}<br />
+            编码: {{ item.code }}
+          </template>
+        </n-card>
+      </n-space>
     </n-space>
   </n-space>
 </template>
@@ -86,10 +91,15 @@ import { defineComponent, ref } from 'vue'
 type RowData = {
   id: string
   location: string
+  location_code: string
   time: string
+  time_code: string
   source: string
+  source_code: string
   carrier: string
+  carrier_code: string
   disaster: string
+  disaster_code: string
   code: string
 }
 
@@ -151,7 +161,14 @@ export default defineComponent({
         this.sources = response.data.map((item: RowData) => item.source)
         this.carriers = response.data.map((item: RowData) => item.carrier)
         this.disasters = response.data.map((item: RowData) => item.disaster)
-        this.codes = response.data.map((item: RowData) => item.code)
+        this.codes = response.data.map(
+          (item: RowData) =>
+            item.location_code +
+            item.time_code +
+            item.source_code +
+            item.carrier_code +
+            item.disaster_code
+        )
         for (let index = 0; index < this.ids.length; index++) {
           let newitem: RowData = {
             id: this.ids[index],
@@ -187,7 +204,12 @@ export default defineComponent({
           this.source = response.data.source
           this.carrier = response.data.carrier
           this.disaster = response.data.disaster
-          this.code = response.data.code
+          this.code =
+            response.data.location_code +
+            response.data.time_code +
+            response.data.source_code +
+            response.data.carrier_code +
+            response.data.disaster_code
         }
       })
     }
